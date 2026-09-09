@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My To-Do List</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="app-container">
+
+        <section class="todo-card">
+
+            <!-- HEADER -->
+            <div class="header">
+                <p class="small-title">MY LITTLE TASKS</p>
+
+                <h1>To-Do List</h1>
+
+                <p class="subtitle">
+                    One little task at a time.
+                </p>
+            </div>
+
+
+            <!-- CREATE TASK -->
+            <form id="taskForm">
+
+                <div class="input-wrapper">
+
+                    <input
+                        type="text"
+                        id="taskInput"
+                        placeholder="What do you need to do?"
+                        autocomplete="off"
+                    >
+
+                    <button type="submit" id="addButton">
+                        +
+                    </button>
+
+                </div>
+
+                <p id="errorMessage"></p>
+
+            </form>
+
+
+            <!-- TASK INFORMATION -->
+            <div class="task-header">
+
+                <span id="taskCount">
+                    0 tasks • 0 done
+                </span>
+
+                <button
+                    type="button"
+                    id="deleteAllBtn"
+                >
+                    Delete All
+                </button>
+
+            </div>
+
+
+            <!-- TASKS ARE DISPLAYED HERE -->
+            <ul id="taskList"></ul>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

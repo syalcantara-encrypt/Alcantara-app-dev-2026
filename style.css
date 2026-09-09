@@ -1,0 +1,478 @@
+/* ==========================================
+   GENERAL PAGE
+========================================== */
+
+/* Applies box-sizing to all elements */
+* {
+    box-sizing: border-box;
+}
+
+
+/* Styles the main webpage */
+body {
+
+    /* Makes the page at least the full height of the screen */
+    min-height: 100vh;
+
+    /* Removes the default margin */
+    margin: 0;
+
+    /* Adds space around the page */
+    padding: 20px;
+
+    /* Centers the application */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Sets the font */
+    font-family: Arial, sans-serif;
+
+    /* Sets the animated background */
+    background-image: url("totoro.gif");
+
+    /* Makes the background cover the screen */
+    background-size: cover;
+
+    /* Centers the background */
+    background-position: center;
+
+    /* Prevents the background from repeating */
+    background-repeat: no-repeat;
+
+    /* Keeps the background fixed while scrolling */
+    background-attachment: fixed;
+}
+
+
+/* ==========================================
+   MAIN CONTAINER
+========================================== */
+
+/* Controls the width of the application */
+.app-container {
+    width: 100%;
+    max-width: 520px;
+}
+
+
+/* ==========================================
+   TO-DO CARD
+========================================== */
+
+/* Styles the main To-Do List card */
+.todo-card {
+
+    /* Adds space inside the card */
+    padding: 32px;
+
+    /* Creates a transparent glass effect */
+    background: rgba(255, 255, 255, 0.12);
+
+    /* Adds a border around the card */
+    border: 1px solid rgba(255, 255, 255, 0.35);
+
+    /* Rounds the corners */
+    border-radius: 24px;
+
+    /* Adds a shadow */
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3);
+
+    /* Creates a blur effect behind the card */
+    backdrop-filter: blur(4px);
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+/* Centers the header content */
+.header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+
+/* Styles the small title */
+.small-title {
+
+    margin: 0 0 5px;
+
+    color: white;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    letter-spacing: 4px;
+
+    text-shadow:
+        1px 1px 2px black;
+}
+
+
+/* Styles the main title */
+.header h1 {
+
+    margin: 0;
+
+    color: white;
+
+    font-family: Georgia, serif;
+
+    font-size: 48px;
+
+    line-height: 1.1;
+
+    text-shadow:
+        2px 2px 3px black;
+}
+
+
+/* Styles the subtitle */
+.subtitle {
+
+    margin: 6px 0 0;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    text-shadow:
+        1px 1px 2px black;
+}
+
+
+/* ==========================================
+   INPUT
+========================================== */
+
+/* Styles the input area */
+.input-wrapper {
+
+    display: flex;
+
+    gap: 8px;
+
+    padding: 6px;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    border: 1px solid rgba(255, 255, 255, 0.4);
+
+    border-radius: 16px;
+}
+
+
+/* Styles the task input */
+#taskInput {
+
+    /* Allows the input to use the available space */
+    flex: 1;
+
+    padding: 10px 14px;
+
+    /* Removes the default border */
+    border: none;
+
+    /* Removes the default outline */
+    outline: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+}
+
+
+/* Styles the placeholder text */
+#taskInput::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+/* Styles the Add button */
+#addButton {
+
+    width: 44px;
+
+    height: 44px;
+
+    border: 1px solid rgba(255, 255, 255, 0.4);
+
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.2);
+
+    color: white;
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* Changes the button appearance when hovered */
+#addButton:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+
+/* ==========================================
+   ERROR MESSAGE
+========================================== */
+
+/* Styles the validation message */
+#errorMessage {
+
+    min-height: 20px;
+
+    margin: 6px 0 0;
+
+    padding-left: 4px;
+
+    color: #fecaca;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    text-shadow:
+        1px 1px 2px black;
+}
+
+
+/* ==========================================
+   TASK HEADER
+========================================== */
+
+/* Arranges the task count and Delete All button */
+.task-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin: 12px 2px;
+}
+
+
+/* Styles the task counter */
+#taskCount {
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    text-shadow:
+        1px 1px 2px black;
+}
+
+
+/* Styles the Delete All button */
+#deleteAllBtn {
+
+    border: none;
+
+    background: transparent;
+
+    color: #fecdd3;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* Changes appearance when Delete All is hovered */
+#deleteAllBtn:hover {
+
+    color: white;
+
+    text-decoration: underline;
+}
+
+
+/* Changes appearance when the button is disabled */
+#deleteAllBtn:disabled {
+
+    color: rgba(255, 255, 255, 0.4);
+
+    cursor: not-allowed;
+}
+
+
+/* ==========================================
+   TASK LIST
+========================================== */
+
+/* Styles the list containing the tasks */
+#taskList {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin: 0;
+
+    padding: 0;
+
+    /* Removes the default bullet points */
+    list-style: none;
+}
+
+
+/* ==========================================
+   INDIVIDUAL TASK
+========================================== */
+
+/* Styles each individual task */
+.task-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Changes the task appearance when hovered */
+.task-item:hover {
+
+    background: rgba(255, 255, 255, 0.25);
+}
+
+
+/* ==========================================
+   CHECKBOX
+========================================== */
+
+/* Styles the completed checkbox */
+.complete-checkbox {
+
+    width: 20px;
+
+    height: 20px;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+}
+
+
+/* ==========================================
+   TASK TITLE
+========================================== */
+
+/* Styles the task text */
+.task-title {
+
+    flex: 1;
+
+    color: white;
+
+    font-size: 15px;
+
+    /* Prevents long text from overflowing */
+    word-break: break-word;
+
+    text-shadow:
+        1px 1px 2px black;
+}
+
+
+/* Changes the appearance of completed tasks */
+.task-title.completed {
+
+    /* Adds a line through completed tasks */
+    text-decoration: line-through;
+
+    opacity: 0.5;
+}
+
+
+/* ==========================================
+   DELETE BUTTON
+========================================== */
+
+/* Styles the individual delete button */
+.delete-btn {
+
+    width: 28px;
+
+    height: 28px;
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.1);
+
+    color: #fecdd3;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+}
+
+
+/* Changes the delete button when hovered */
+.delete-btn:hover {
+
+    background: #e11d48;
+
+    color: white;
+}
+
+
+/* ==========================================
+   MOBILE RESPONSIVENESS
+========================================== */
+
+/* Changes the layout for smaller screens */
+@media (max-width: 600px) {
+
+    body {
+        padding: 12px;
+    }
+
+    .todo-card {
+        padding: 24px;
+    }
+
+    .header h1 {
+        font-size: 40px;
+    }
+
+}
