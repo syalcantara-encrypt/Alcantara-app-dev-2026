@@ -1,6 +1,16 @@
 let users = [
-    { id: 1, name: "John", email: "john@gmail.com" },
-    { id: 2, name: "Jane", email: "jane@gmail.com" }
+  {
+    id: 1,
+    email: "john@gmail.com",
+    username: "john",
+    password: "123456"
+  },
+  {
+    id: 2,
+    email: "jane@gmail.com",
+    username: "jane",
+    password: "123456"
+  }
 ];
 
 module.exports = users;

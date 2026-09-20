@@ -1,97 +1,90 @@
 const express = require("express");
+const path = require("path");
 const users = require("./users.js");
 
 const app = express();
-
-app.use(express.json());
-
 const PORT = 3000;
 
-// Start server
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+// Middleware
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 
-// GET all users
-app.get("/users", (req, res) => {
-    res.json(users);
-});
+// ==================== SIGNUP ====================
 
-// POST a new user
-app.post("/users", (req, res) => {
-    const { name, email } = req.body;
+app.post("/signup", (req, res) => {
+    const { email, username, password } = req.body;
 
-    // Validation
-    if (!name || !email) {
+    // Check if any field is empty
+    if (!email || !username || !password) {
         return res.status(400).json({
-            message: "Name and email are required"
+            message: "All fields are required"
+        });
+    }
+
+    // Check if username already exists
+    const existingUser = users.find(
+        user => user.username === username
+    );
+
+    if (existingUser) {
+        return res.status(409).json({
+            message: "Username already exists"
         });
     }
 
     // Create new user
     const newUser = {
         id: users.length + 1,
-        name,
-        email
+        email: email,
+        username: username,
+        password: password
     };
 
-    // Add user to array
+    // Store new user
     users.push(newUser);
 
-    // Return created user
-    res.status(201).json(newUser);
-});
-
-// PUT update an existing user
-app.put("/users/:id", (req, res) => {
-    const id = parseInt(req.params.id);
-    const { name, email } = req.body;
-
-    // Find user
-    const user = users.find(user => user.id === id);
-
-    // Check if user exists
-    if (!user) {
-        return res.status(404).json({
-            message: "User not found"
-        });
-    }
-
-    // Validation
-    if (!name || !email) {
-        return res.status(400).json({
-            message: "Name and email are required"
-        });
-    }
-
-    // Update user
-    user.name = name;
-    user.email = email;
-
-    // Return updated user
-    res.json(user);
-});
-
-// DELETE a user
-app.delete("/users/:id", (req, res) => {
-    const id = parseInt(req.params.id);
-
-    // Find user index
-    const userIndex = users.findIndex(user => user.id === id);
-
-    // Check if user exists
-    if (userIndex === -1) {
-        return res.status(404).json({
-            message: "User not found"
-        });
-    }
-
-    // Delete user
-    const deletedUser = users.splice(userIndex, 1);
-
-    // Return deleted user
-    res.json({
-        message: "User deleted successfully",
-        user: deletedUser[0]
+    // Successful signup
+    res.status(201).json({
+        message: "Signup successful",
+        user: newUser
     });
+});
+
+// ==================== LOGIN ====================
+
+app.post("/login", (req, res) => {
+    const { username, password } = req.body;
+
+    // Check if any field is empty
+    if (!username || !password) {
+        return res.status(400).json({
+            message: "Username and password are required"
+        });
+    }
+
+    // Find existing user
+    const user = users.find(
+        user =>
+            user.username === username &&
+            user.password === password
+    );
+
+    // User does not exist / wrong credentials
+    if (!user) {
+        return res.status(401).json({
+            message: "Invalid username or password"
+        });
+    }
+
+    // Successful login
+    res.status(200).json({
+        message: "Login successful",
+        user: user
+    });
+});
+
+// ==================== START SERVER ====================
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
