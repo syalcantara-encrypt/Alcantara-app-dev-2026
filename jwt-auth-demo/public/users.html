@@ -1,0 +1,55 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Users</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 640px; margin: 3rem auto; padding: 0 1rem; }
+    nav a { margin-right: 1rem; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { text-align: left; padding: .5rem; border-bottom: 1px solid #ddd; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/about.html">About Me</a>
+    <a href="/users.html">Users</a>
+  </nav>
+
+  <h1>Registered Users</h1>
+  <table>
+    <thead><tr><th>Username</th><th>Email</th><th>Bio</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+
+  <script>
+    const token = localStorage.getItem("token");
+    if (!token) window.location.href = "/index.html";
+
+    async function load() {
+      const res = await fetch("/api/users", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) {
+        localStorage.removeItem("token");
+        window.location.href = "/index.html";
+        return;
+      }
+      const users = await res.json();
+      const rows = document.getElementById("rows");
+      for (const u of users) {
+        const tr = document.createElement("tr");
+        for (const value of [u.username, u.email, u.bio]) {
+          const td = document.createElement("td");
+          td.textContent = value; // textContent, not innerHTML, to avoid XSS
+          tr.appendChild(td);
+        }
+        rows.appendChild(tr);
+      }
+    }
+    load();
+  </script>
+</body>
+</html>
