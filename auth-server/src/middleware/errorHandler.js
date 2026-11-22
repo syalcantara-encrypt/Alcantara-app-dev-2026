@@ -1,4 +1,9 @@
-// Express knows this is an error handler because it has 4 parameters.
+// 4 arguments = Express knows this is the error handler
 module.exports = (err, req, res, next) => {
-  res.status(err.status || 500).json({ error: err.message || 'Server error' });
+  const status = err.status || err.statusCode || 500;
+  if (status >= 500) {
+    console.error(err);                       // show the real error in the terminal only
+    return res.status(500).json({ error: "Server error" });
+  }
+  res.status(status).json({ error: err.message });
 };
